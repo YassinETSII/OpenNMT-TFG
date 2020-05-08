@@ -26,6 +26,9 @@ def index():
     text = None
     language = "en-es" #Default
     if form.validate_on_submit():
+        for x in range(6):
+        yield "<br/>"
+        yield str(x)
         source = form.pagedown.data.lower()
         source = re.sub(r"([?.!,:;¿])", r" \1 ", source)
         source = re.sub(r'[" "]+', " ", source)
