@@ -1,0 +1,19 @@
+{
+    "models_root": "./available_models",
+    "models": [
+        {
+            "id": 100,
+            "model": "model_minimal.pt",
+            "timeout": 600,
+            "on_timeout": "to_cpu",
+            "load": true,
+            "opt": {
+                "gpu":-1,
+                "beam_size": 5,
+                "replace_unk":true,
+                "verbose":true
+            }
+        }
+    ]
+}
+}
