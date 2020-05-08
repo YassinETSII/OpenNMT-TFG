@@ -4,7 +4,7 @@
         {
             "id": 100,
             "model": "model_minimal.pt",
-            "timeout": 600,
+            "timeout": -1,
             "on_timeout": "to_cpu",
             "load": true,
             "opt": {
