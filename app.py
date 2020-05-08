@@ -6,7 +6,6 @@ from flask_wtf import FlaskForm
 from flask_pagedown import PageDown
 from flask_pagedown.fields import PageDownField
 from wtforms.fields import SubmitField
-from onmt.translate import TranslationServer
 import requests
 import json
 import re
@@ -14,8 +13,6 @@ import re
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 pagedown = PageDown(app)
-translation_server = TranslationServer()
-translation_server.start("./available_models/conf.json")
 
 class PageDownFormExample(FlaskForm):
     pagedown = PageDownField('')
