@@ -30,7 +30,7 @@ def index():
         source = re.sub(r"([?.!,:;¿])", r" \1 ", source)
         source = re.sub(r'[" "]+', " ", source)
         language = "en-es"
-        url = "https://nmtyas.herokuapp.com/translator/translate"
+        url = "https://nmtyas.herokuapp.com:5000/translator/translate"
         headers = {"Content-Type": "application/json"}
         data = [{"src": source, "id": 100}]
         response = requests.post(url, json=data, headers=headers)
