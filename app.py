@@ -22,10 +22,6 @@ class PageDownFormExample(FlaskForm):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    def generate():
-        for x in range(6):
-            yield "<br/>"
-            yield str(x)
     form = PageDownFormExample()
     text = None
     language = "en-es" #Default
