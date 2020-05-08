@@ -5,8 +5,8 @@
             "id": 100,
             "model": "model_minimal.pt",
             "timeout": -1,
-            "on_timeout": "to_cpu",
-            "load": true,
+            "on_timeout": "unload",
+            "load": false,
             "opt": {
                 "gpu":-1,
                 "beam_size": 1,
