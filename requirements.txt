@@ -3,8 +3,7 @@ sphinx-markdown-tables==0.0.12
 sphinx-rtd-theme==0.4.*
 sphinx==2.3.*
 cffi
-torchvision
-torch==1.5.0
+
 torchtext==0.6.0
 joblib
 librosa
