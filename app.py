@@ -34,16 +34,13 @@ def index():
         data = [{"src": source, "id": 100}]
         response = requests.post(url, json=data, headers=headers)
         translation = response.text
-        jsn = json.loads(translation)
+        jsn = json.loads(translation.decode("utf-8"))
         text = jsn[0][0]['tgt']
         text = re.sub(r" ([?.!,:،؛؟¿])", r"\1", text)
         text = re.sub(r'@@ ', "", text)
     else:
         form.pagedown.data = ('We can see an example of translation with this sentence')
     return render_template('index.html', form=form, language=language, text=text)
-
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)
