@@ -26,8 +26,7 @@ onmt==1.0.0
 simplejson==3.16.0
 six
 tqdm~=4.30.0
-torch>=1.4.0
-torchtext==0.4.0
+http://download.pytorch.org/whl/cpu/torch-0.4.1-cp36-cp36m-linux_x86_64.whltorchtext==0.4.0
 future
 configargparse
 tensorboard>=1.14
