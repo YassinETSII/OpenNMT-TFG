@@ -401,7 +401,10 @@ class Translator(object):
                         os.write(1, output.encode('utf-8'))
 
                 if align_debug:
-                    tgts = trans.pred_sents[0]
+                    if trans.gold_sent is not None:
+                        tgts = trans.gold_sent
+                    else:
+                        tgts = trans.pred_sents[0]
                     align = trans.word_aligns[0].tolist()
                     if self.data_type == 'text':
                         srcs = trans.src_raw
@@ -471,8 +474,11 @@ class Translator(object):
         alignment src indice Tensor in size ``(batch, n_best,)``.
         """
         # (0) add BOS and padding to tgt prediction
-        batch_tgt_idxs = self._align_pad_prediction(
-            predictions, bos=self._tgt_bos_idx, pad=self._tgt_pad_idx)
+        if hasattr(batch, 'tgt'):
+            batch_tgt_idxs = batch.tgt.transpose(1, 2).transpose(0, 2)
+        else:
+            batch_tgt_idxs = self._align_pad_prediction(
+                predictions, bos=self._tgt_bos_idx, pad=self._tgt_pad_idx)
         tgt_mask = (batch_tgt_idxs.eq(self._tgt_pad_idx) |
                     batch_tgt_idxs.eq(self._tgt_eos_idx) |
                     batch_tgt_idxs.eq(self._tgt_bos_idx))

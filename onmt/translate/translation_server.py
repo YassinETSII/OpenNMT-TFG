@@ -159,6 +159,7 @@ class TranslationServer(object):
 
     def clone_model(self, model_id, opt, timeout=-1):
         """Clone a model `model_id`.
+
         Different options may be passed. If `opt` is None, it will use the
         same set of options
         """
@@ -180,6 +181,7 @@ class TranslationServer(object):
 
     def preload_model(self, opt, model_id=None, **model_kwargs):
         """Preloading the model: updating internal datastructure
+
         It will effectively load the model if `load` is set
         """
         if model_id is not None:
@@ -198,8 +200,10 @@ class TranslationServer(object):
 
     def run(self, inputs):
         """Translate `inputs`
+
         We keep the same format as the Lua version i.e.
         ``[{"id": model_id, "src": "sequence to translate"},{ ...}]``
+
         We use inputs[0]["id"] as the model id
         """
 
@@ -212,6 +216,7 @@ class TranslationServer(object):
 
     def unload_model(self, model_id):
         """Manually unload a model.
+
         It will free the memory and cancel the timer
         """
 
@@ -231,6 +236,7 @@ class TranslationServer(object):
 
 class ServerModel(object):
     """Wrap a model with server functionality.
+
     Args:
         opt (dict): Options for the Translator
         model_id (int): Model ID
@@ -342,8 +348,10 @@ class ServerModel(object):
 
     def parse_opt(self, opt):
         """Parse the option set passed by the user using `onmt.opts`
+
        Args:
            opt (dict): Options passed by the user
+
        Returns:
            opt (argparse.Namespace): full set of options for the Translator
         """
@@ -412,8 +420,10 @@ class ServerModel(object):
     @critical
     def run(self, inputs):
         """Translate `inputs` using this model
+
         Args:
             inputs (List[dict[str, str]]): [{"src": "..."},{"src": ...}]
+
         Returns:
             result (list): translations
             times (dict): containing times
@@ -562,6 +572,7 @@ class ServerModel(object):
 
     def do_timeout(self):
         """Timeout function that frees GPU memory.
+
         Moves the model to CPU or unloads it; depending on
         attr`self.on_timemout` value
         """
@@ -628,6 +639,7 @@ class ServerModel(object):
 
     def maybe_preprocess(self, sequence):
         """Preprocess the sequence (or not)
+
         """
         if type(sequence) is str:
             sequence = {
@@ -640,8 +652,10 @@ class ServerModel(object):
 
     def preprocess(self, sequence):
         """Preprocess a single sequence.
+
         Args:
             sequence (str): The sequence to preprocess.
+
         Returns:
             sequence (str): The preprocessed sequence.
         """
@@ -653,6 +667,7 @@ class ServerModel(object):
 
     def maybe_tokenize(self, sequence):
         """Tokenize the sequence (or not).
+
         Same args/returns as `tokenize`
         """
 
@@ -662,8 +677,10 @@ class ServerModel(object):
 
     def tokenize(self, sequence):
         """Tokenize a single sequence.
+
         Args:
             sequence (str): The sequence to tokenize.
+
         Returns:
             tok (str): The tokenized sequence.
         """
@@ -696,9 +713,11 @@ class ServerModel(object):
 
     def maybe_detokenize_with_align(self, sequence, src):
         """De-tokenize (or not) the sequence (with alignment).
+
         Args:
             sequence (str): The sequence to detokenize, possible with
                 alignment seperate by ` ||| `.
+
         Returns:
             sequence (str): The detokenized sequence.
             align (str): The alignment correspand to detokenized src/tgt
@@ -715,6 +734,7 @@ class ServerModel(object):
 
     def maybe_detokenize(self, sequence):
         """De-tokenize the sequence (or not)
+
         Same args/returns as :func:`tokenize()`
         """
 
@@ -724,6 +744,7 @@ class ServerModel(object):
 
     def detokenize(self, sequence):
         """Detokenize a single sequence
+
         Same args/returns as :func:`tokenize()`
         """
 
@@ -739,10 +760,12 @@ class ServerModel(object):
 
     def maybe_convert_align(self, src, tgt, align):
         """Convert alignment to match detokenized src/tgt (or not).
+
         Args:
             src (str): The tokenized source sequence.
             tgt (str): The tokenized target sequence.
             align (str): The alignment correspand to src/tgt pair.
+
         Returns:
             align (str): The alignment correspand to detokenized src/tgt.
         """
@@ -752,6 +775,7 @@ class ServerModel(object):
 
     def maybe_postprocess(self, sequence):
         """Postprocess the sequence (or not)
+
         """
         if self.postprocess_opt is not None:
             return self.postprocess(sequence)
@@ -760,8 +784,10 @@ class ServerModel(object):
 
     def postprocess(self, sequence):
         """Preprocess a single sequence.
+
         Args:
             sequence (str): The sequence to process.
+
         Returns:
             sequence (str): The postprocessed sequence.
         """
